@@ -1,0 +1,14 @@
+.DS_Store
+.vscode
+
+/dockerbuild-*
+/plugins
+/modules
+/vendor
+
+
+log.txt
+debug.txt
+config-*.php
+
+
