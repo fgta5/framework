@@ -5,6 +5,7 @@ use AgungDhewe\Webservice\Configuration;
 use AgungDhewe\Webservice\Service;
 
 use AgungDhewe\Webservice\Router;
+use AgungDhewe\Webservice\Routers\PageRoute;
 
 
 // script ini hanya dijalankan di web server
@@ -12,6 +13,16 @@ if (php_sapi_name() === 'cli') {
 	die("Script cannot be executed directly from CLI\n\n");
 }
 
+// untuk keperluan debug halaman web
+if (getenv('DEBUG')) {
+	$urlreq = array_key_exists('urlreq', $_GET) ? trim($_GET['urlreq'], '/') : PageRoute::DEFAULT_PAGE;
+	$pattern = "page/*";
+	$regexPattern = str_replace('*', '.*', $pattern);
+	$regexPattern = str_replace('/', '\/', $regexPattern); // Escape slashes
+	if (preg_match("/^$regexPattern$/", $urlreq, $matches)) {
+		$_GET['cleardebug'] = 1;
+	}
+}
 
 try {
 	$configfile = 'config.php';
@@ -28,15 +39,8 @@ try {
 	Configuration::setRootDir(__DIR__);
 	Configuration::setLogger();
 
-	
-
 	// Route internal
-	// Router::GET('container', 'AgungDhewe\Webservice\Routers\ContainerRoute');
-	// Router::GET('login', 'AgungDhewe\Webservice\Routers\LoginRoute');
-	Router::GET('template/*', 'AgungDhewe\Webservice\Routers\TemplateRoute');
-	Router::GET('asset/*', 'AgungDhewe\Webservice\Routers\AssetRoute');
-	Router::GET('page/*', 'AgungDhewe\Webservice\Routers\PageRoute');
-	Router::POST('api/*', 'AgungDhewe\Webservice\Routers\ApiRoute');
+	Router::setupDefaultRoutes();
 
 	// Route external: akan menggunakan format PSR4
 	Router::GET('module/asset/*', 'AgungDhewe\Webservice\Routers\ModuleAssetRoute');
