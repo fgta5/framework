@@ -4,48 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "767eb3dd44e4512bd5f94508f5f11e2c",
+    "content-hash": "d6d1cd72cb7611153d056999f1e216ea",
     "packages": [
-        {
-            "name": "agungdhewe/phplogger",
-            "version": "v1.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agungdhewe/phplogger.git",
-                "reference": "37bdef4841e29b7bfaa60c85f0b46a671eebbbcf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agungdhewe/phplogger/zipball/37bdef4841e29b7bfaa60c85f0b46a671eebbbcf",
-                "reference": "37bdef4841e29b7bfaa60c85f0b46a671eebbbcf",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "AgungDhewe\\PhpLogger\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Agung Nugroho",
-                    "email": "agung.dhewe@gmail.com"
-                }
-            ],
-            "description": "logger untuk PHP",
-            "support": {
-                "issues": "https://github.com/agungdhewe/phplogger/issues",
-                "source": "https://github.com/agungdhewe/phplogger/tree/v1.1.4"
-            },
-            "time": "2024-11-05T04:44:10+00:00"
-        },
         {
             "name": "agungdhewe/phpsqlutil",
             "version": "v1.2.2",
@@ -85,6 +45,40 @@
                 "source": "https://github.com/agungdhewe/phpsqlutil/tree/v1.2.2"
             },
             "time": "2024-10-16T13:21:54+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "agungdhewe/phplogger",
+            "version": "dev-dw-pc-office",
+            "dist": {
+                "type": "path",
+                "url": "plugins/agungdhewe/phplogger",
+                "reference": "084e6d927e4eb67775eddf6417d42ec42e00767e"
+            },
+            "require": {
+                "php": "^8.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AgungDhewe\\PhpLogger\\": "src/"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Agung Nugroho",
+                    "email": "agung.dhewe@gmail.com"
+                }
+            ],
+            "description": "logger untuk PHP",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "agungdhewe/webservice",
@@ -95,9 +89,11 @@
                 "reference": "eeea57d4864f84433845c3370a2d28b02e4c921f"
             },
             "require": {
-                "agungdhewe/phplogger": "^1.1",
                 "agungdhewe/phpsqlutil": "^1.2",
                 "php": "^8.3"
+            },
+            "require-dev": {
+                "agungdhewe/phplogger": "dev-dw-pc-office"
             },
             "type": "library",
             "autoload": {
@@ -121,10 +117,10 @@
             }
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "agungdhewe/phplogger": 20,
         "agungdhewe/webservice": 20
     },
     "prefer-stable": false,
