@@ -25,7 +25,7 @@
         "php": "^8.3",
         "agungdhewe/phpsqlutil": "^1.2",
 		"agungdhewe/phplogger": "^1.1",
-		"agungdhewe/webservice": "dev-dw-pc-office"
+		"agungdhewe/webservice": "@dev"
     }
 
 }

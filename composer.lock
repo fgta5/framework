@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91a0196f7bfa55dc3ad55afaa0a6f876",
+    "content-hash": "7b0ddd8bcf1d361eec7501ad4d93ea71",
     "packages": [
         {
             "name": "agungdhewe/phplogger",
@@ -88,11 +88,11 @@
         },
         {
             "name": "agungdhewe/webservice",
-            "version": "dev-dw-pc-office",
+            "version": "dev-dw-pc-home",
             "dist": {
                 "type": "path",
                 "url": "plugins/agungdhewe/webservice",
-                "reference": "86989affa0f86811657e819d0f58fc7e44dd1aaa"
+                "reference": "6e39fe794625ee307289b10a963a0a837bf8062b"
             },
             "require": {
                 "agungdhewe/phplogger": "^1.1",
@@ -132,6 +132,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

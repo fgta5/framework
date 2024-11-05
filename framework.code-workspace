@@ -16,7 +16,14 @@
 			"**/vendor/**/{Tests,tests}/**",
 			"**/.history/**",
 			"**/vendor/**/vendor/**",
-			"**/vendor/transfashion/**"
-		]
+			"**/vendor/transfashion/**",
+			"**/vendor/composer/**"
+		],
+		"files.exclude": {
+			"**/plugins/*/*/composer*":true,
+			"**/plugins/*/*/config*":true,
+			"**/plugins/*/*/[^src]*": true,
+
+		}
 	}
 }
