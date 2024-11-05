@@ -9,4 +9,9 @@
 URL="https://fgta5.localhost"
 
 echo GET $URL
-curl -D - $URL
+curl -D - \
+     -H "webservice-debug-channel: fgta5-dev" \
+	 $URL
+
+
+

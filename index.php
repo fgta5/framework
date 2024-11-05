@@ -6,7 +6,8 @@ use AgungDhewe\Webservice\Service;
 
 use AgungDhewe\Webservice\Router;
 use AgungDhewe\Webservice\Routes\PageRoute;
-
+use Fgta5\Framework\ModulePage;
+use Fgta5\Framework\ModuleRouter;
 
 // script ini hanya dijalankan di web server
 if (php_sapi_name() === 'cli') {
@@ -40,9 +41,8 @@ try {
 	Router::setupDefaultRoutes();
 
 	// Route external: akan menggunakan format PSR4
-	Router::GET('module/asset/*', 'Fgta5\Framework\Routes\ModuleAssetRoute');
-	Router::GET('module/page/*', 'Fgta5\Framework\Routes\ModulePageRoute');
-	Router::POST('module/api/*', 'Fgta5\Framework\Routes\ModuleApiRoute');
+	ModuleRouter::setupModuleRoutes();
+
 
 	// Serve url
 	Service::main();
