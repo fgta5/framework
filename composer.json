@@ -1,5 +1,5 @@
 {
-    "name": "fgta4/framework",
+    "name": "fgta5/framework",
     "description": "Framework aplikasi PHP",
     "type": "project",
     "authors": [
@@ -23,11 +23,9 @@
 	],
 	"require": {
         "php": "^8.3",
-        "agungdhewe/phpsqlutil": "^1.2"
-    },
-	"require-dev": {
-		"agungdhewe/phplogger": "dev-dw-pc-office",
+        "agungdhewe/phpsqlutil": "^1.2",
+		"agungdhewe/phplogger": "^1.1",
 		"agungdhewe/webservice": "dev-dw-pc-office"
-	}
+    }
 
 }
