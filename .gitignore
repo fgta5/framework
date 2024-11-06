@@ -7,6 +7,8 @@
 /vendor
 
 
+composer.lock
+
 log.txt
 debug.txt
 config-*.php
