@@ -40,11 +40,7 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 			// Cek Class Exists
 			$requestedModulePageClass = ServiceRoute::getRequestedParameter('module/page/', $this->urlreq);
 			$modulePageClass = str_replace('/', '\\', $requestedModulePageClass);
-			Log::info("loading class $modulePageClass");	
-			if (!class_exists($modulePageClass)) {
-				$errmsg = Log::error("Class Module '$modulePageClass' is not exists");
-				throw new \Exception($errmsg, 500);
-			}
+
 
 
 			// DefaultModulePageClass:  <vendor>\<name>\ModulePage
@@ -54,6 +50,23 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 			Log::info("loading class $defclass");	
 			if (!class_exists($defclass)) {
 				$errmsg = Log::error("Class '$defclass' is not exists");
+				throw new \Exception($errmsg, 500);
+			}
+
+			
+			// loading class, tidak ikut PSR4
+			$path = $defclass::GetModulePagePath($modulePageClass);
+			if (!is_file($path)) {
+				$errmsg = Log::error("File '$path' is not exists");
+				throw new \Exception($errmsg, 500);
+			}
+			require_once $path;
+
+			
+
+			Log::info("loading class $modulePageClass");	
+			if (!class_exists($modulePageClass)) {
+				$errmsg = Log::error("Class Module '$modulePageClass' is not exists");
 				throw new \Exception($errmsg, 500);
 			}
 
@@ -78,21 +91,41 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 			}
 
 
-			// Load Module
 			$module = new $modulePageClass();
-			$content = $module->LoadPage();
-
-			// get template renderer
 			$tpl = $module->getTemplate(['modulepageclass'=>$modulePageClass]);
+			self::SetTemplate($tpl);
+			
 			
 
-			// cek apakah template valid
-			if (!WebTemplate::Validate($tpl)) {
-				$tplclassname = get_class($tpl);
-				$errmsg = Log::error("Class '$tplclassname' not subclass of WebTemplate");
-				throw new \Exception($errmsg, 500);
-			}
+			
+			// Load Module
+			$content = "";
+			$params = [];
+			try {
+				// cek apakah template valid
+				if (!WebTemplate::Validate($tpl)) {
+					$tplclassname = get_class($tpl);
+					$errmsg = Log::error("Class '$tplclassname' not subclass of WebTemplate");
+					throw new \Exception($errmsg, 500);
+				}
 
+				ob_start();
+				$module->LoadPage($params);
+				$data = $module->getData();
+				self::SetData($data);
+
+				// set data template setelah selesai load page
+				$title = $module->getTitle();
+				$tpl->setTitle($title);
+
+
+				$content = ob_get_contents();
+			} catch (\Exception $ex) {
+				$errmsg = Log::error($ex->getMessage());
+				throw new \Exception($errmsg, $ex->getCode());
+			} finally {
+				ob_end_clean();
+			}
 
 
 			$tpl->Render($content);

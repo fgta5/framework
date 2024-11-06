@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
+use AgungDhewe\PhpLogger\Logger;
 use AgungDhewe\Webservice\Configuration;
 use AgungDhewe\Webservice\Service;
 
@@ -32,6 +33,7 @@ try {
 	require_once $configpath;
 	Configuration::setRootDir(__DIR__);
 	Configuration::setLogger();
+	Logger::ShowScriptReferenceToUser(false);
 
 	// Prepare debug
 	PageRoute::ResetDebugOnPageRequest(["page/*", "module/page/*"]);
