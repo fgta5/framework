@@ -11,7 +11,7 @@ class TestPage extends ModulePage implements IModulePage {
 
 			$this->setTitle("Judul Module");
 
-			$pageviewpath = implode('/', [__DIR__, 'TestPage.phtml']);
+			$pageviewpath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'TestPage.phtml']);
 			$this->render($pageviewpath);
 		} catch (\Exception $ex) {
 			Log::error($ex->getMessage());

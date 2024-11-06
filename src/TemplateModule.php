@@ -14,11 +14,11 @@ class TemplateModule extends WebTemplate {
 	public function GetTemplateDir() : string {
 		$name = $this->GetName();
 		$rootDir = Configuration::getRootDir();
-		$templatedir = implode('/', [$rootDir, 'templates', $name]);
+		$templatedir = implode(DIRECTORY_SEPARATOR, [$rootDir, 'templates', $name]);
 		if (is_dir($templatedir)) {
 			return $templatedir;
 		} else {
-			$templatedir = implode('/', [__DIR__, '..', 'templates']);
+			$templatedir = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'templates']);
 			return $templatedir;
 		}
 	}

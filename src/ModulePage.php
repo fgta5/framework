@@ -53,7 +53,7 @@ class ModulePage implements IDefaultModule {
 		$classdir = str_replace($ns . '\\', '', $modulePageClass);
 		$classdir = str_replace('\\', '/', $classdir);
 		$classname = basename($classdir);
-		$path = implode('/', [__DIR__, $classdir, "$classname.php"]);
+		$path = implode(DIRECTORY_SEPARATOR, [__DIR__, $classdir, "$classname.php"]);
 		return $path;
 	}
 

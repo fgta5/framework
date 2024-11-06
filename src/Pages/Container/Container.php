@@ -11,7 +11,7 @@ class Container extends ModulePage implements IModulePage {
 
 			$this->setTitle("Container");
 			
-			$pageviewpath = implode('/', [__DIR__, 'Container.phtml']);
+			$pageviewpath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'Container.phtml']);
 			Log::info("rendering file $pageviewpath");
 			$this->render($pageviewpath);
 		} catch (\Exception $ex) {
