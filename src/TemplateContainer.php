@@ -2,8 +2,9 @@
 
 use AgungDhewe\Webservice\WebTemplate;
 use AgungDhewe\Webservice\Configuration;
+use AgungDhewe\Webservice\IWebTemplate;
 
-class TemplateContainer extends WebTemplate {
+class TemplateContainer extends WebTemplate implements IWebTemplate {
 	const string NAME = "containertemplate";
 
 	public function GetName() : string {
@@ -21,5 +22,6 @@ class TemplateContainer extends WebTemplate {
 			return $templatedir;
 		}
 	}
+
 
 }

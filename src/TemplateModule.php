@@ -2,9 +2,9 @@
 
 use AgungDhewe\Webservice\WebTemplate;
 use AgungDhewe\Webservice\Configuration;
+use AgungDhewe\Webservice\IWebTemplate;
 
-
-class TemplateModule extends WebTemplate {
+class TemplateModule extends WebTemplate implements IWebTemplate  {
 	const string NAME = "moduletemplate";
 
 	public function GetName() : string {

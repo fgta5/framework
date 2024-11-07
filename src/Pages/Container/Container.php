@@ -6,7 +6,7 @@ use Fgta5\Framework\IModulePage;
 use Fgta5\Framework\ModulePage;
 
 class Container extends ModulePage implements IModulePage {
-	public function LoadPage(array $params): void {
+	public function LoadPage(string $requestedPage, array $params): void {
 		try {
 
 			$this->setTitle("Container");
