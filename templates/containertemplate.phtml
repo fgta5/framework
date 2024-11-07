@@ -1,15 +1,18 @@
-<!DOCTYPE html>
+<?php
+	use AgungDhewe\Webservice\WebTemplate;
+	$page = WebTemplate::getTemplateObject($this);
+?><!DOCTYPE html>
 <html>
 	<head>
-		<title><?=$this->getTitle()?></title>
+		<title><?=$page->getTitle()?></title>
 		<link rel="icon" href="/favicon.ico">
-		<link rel="stylesheet" href="<?=$this->getAssetUrl('assets/style.css')?>">
-		<?=$this->getBlockContent('header-metadata')?>
-		<?=$this->getBlockContent('header-style')?>
+		<link rel="stylesheet" href="<?=$page->GetTemplateAssetUrl('assets/style.css')?>">
+		<?=$page->getBlockContent('header-metadata')?>
+		<?=$page->getBlockContent('header-style')?>
 		<script>
 			var $ui = {};
 		</script>
-		<?=$this->getBlockContent('header-script')?>
+		<?=$page->getBlockContent('header-script')?>
 	</head>
 
 	<body>
@@ -18,11 +21,11 @@
 			<nav></nav>
 		</header>
 		<main>
-			<?=$this->getMainContent()?>
+			<?=$page->getMainContent()?>
 		</main>
 		<footer>
 			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
 		</footer>
 	</body>	
-	<?=$this->getBlockContent('footer-script')?>
+	<?=$page->getBlockContent('footer-script')?>
 </body>

@@ -4,7 +4,7 @@ use AgungDhewe\PhpLogger\Log;
 use AgungDhewe\Webservice\ServiceRoute;
 use AgungDhewe\Webservice\WebTemplate;
 
-class ModulePage implements IDefaultModule {
+abstract class ModulePage implements IDefaultModule {
 	private string $_title = "";
 	private array $_data = [];
 	

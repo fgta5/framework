@@ -91,9 +91,10 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 			}
 
 
-			$module = new $modulePageClass();
+			$module = self::createModule($modulePageClass);
 			$tpl = $module->getTemplate(['modulepageclass'=>$modulePageClass]);
 			self::SetTemplate($tpl);
+			
 			
 			
 
@@ -110,7 +111,7 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 				}
 
 				ob_start();
-				$module->LoadPage($params);
+				$module->LoadPage($requestedModulePageClass, $params);
 				$data = $module->getData();
 				self::SetData($data);
 
@@ -135,4 +136,12 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 		}
 
 	}
+
+
+	private static function createModule($modulePageClass) : IModulePage {
+		$module = new $modulePageClass();
+		return $module;
+	}
+
+
 }
