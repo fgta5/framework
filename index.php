@@ -4,11 +4,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 use AgungDhewe\PhpLogger\Logger;
 use AgungDhewe\Webservice\Configuration;
 use AgungDhewe\Webservice\Service;
-
 use AgungDhewe\Webservice\Router;
 use AgungDhewe\Webservice\Routes\PageRoute;
-use Fgta5\Framework\ModulePage;
-use Fgta5\Framework\ModuleRouter;
+
+use Fgta5\Framework\Routes\ModuleAssetRoute;
+use Fgta5\Framework\Routes\ModulePageRoute;
+use Fgta5\Framework\Routes\ModuleApiRoute;
 
 // script ini hanya dijalankan di web server
 if (php_sapi_name() === 'cli') {
@@ -25,27 +26,31 @@ try {
 		$configfile = getenv('CONFIG');
 	}
 
-	$configpath = implode('/', [__DIR__, $configfile]);
+	$configpath = implode(DIRECTORY_SEPARATOR, [__DIR__, $configfile]);
 	if (!is_file($configpath)) {
 		throw new Exception("Configuration '$configfile' is not found");
 	}
 
 	require_once $configpath;
-	Configuration::setRootDir(__DIR__);
-	Configuration::setLogger();
+	Configuration::SetRootDir(__DIR__);
+	Configuration::SetLogger();
 	Logger::ShowScriptReferenceToUser(false);
+
 
 	// Prepare debug
 	PageRoute::ResetDebugOnPageRequest(["page/*", "module/page/*"]);
 
 
-	// Route internal
+	// Route internal agungdhewe/webservice
 	Router::setupDefaultRoutes();
 
-	// Route external: akan menggunakan format PSR4
-	ModuleRouter::setupModuleRoutes();
+	// Route external: fgta5
+	Router::GET('module/asset/*', ModuleAssetRoute::class);
+	Router::GET('module/page/*', ModulePageRoute::class);
+	Router::POST('module/api/*', ModuleApiRoute::class);
 
 
+	
 	// Serve url
 	Service::main();
 
