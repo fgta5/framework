@@ -5,12 +5,12 @@ use AgungDhewe\Webservice\IRouteHandler;
 use AgungDhewe\Webservice\Routes\PageRoute;
 use AgungDhewe\Webservice\Database;
 use AgungDhewe\Webservice\ServiceRoute;
-use AgungDhewe\Webservice\WebTemplate;
+use AgungDhewe\Webservice\Session;
 
 use Fgta5\Framework\IDefaultModule;
 use Fgta5\Framework\IModulePage;
 use Fgta5\Framework\ModulePage;
-use Fgta5\Framework\TemplateContainer;
+
 
 class ModulePageRoute extends PageRoute implements IRouteHandler {
 	function __construct(string $urlreq) {
@@ -31,10 +31,7 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 
 			// Koneksi database
 			Database::Connect();
-
-			// Cek Session
-
-
+			Session::Start();
 			
 
 			// Cek Class Exists
@@ -96,36 +93,33 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 			self::SetTemplate($tpl);
 			
 			
-			
-
-			
 			// Load Module
-			$content = "";
+			$content = "ini default content";
 			$params = [];
 			try {
-				// cek apakah template valid
-				if (!WebTemplate::Validate($tpl)) {
-					$tplclassname = get_class($tpl);
-					$errmsg = Log::error("Class '$tplclassname' not subclass of WebTemplate");
-					throw new \Exception($errmsg, 500);
-				}
+				// // cek apakah template valid
+				// if (!WebTemplate::Validate($tpl)) {
+				// 	$tplclassname = get_class($tpl);
+				// 	$errmsg = Log::error("Class '$tplclassname' not subclass of WebTemplate");
+				// 	throw new \Exception($errmsg, 500);
+				// }
 
-				ob_start();
-				$module->LoadPage($requestedModulePageClass, $params);
-				$data = $module->getData();
-				self::SetData($data);
+				// ob_start();
+				// $module->LoadPage($requestedModulePageClass, $params);
+				// $data = $module->getData();
+				// self::SetData($data);
 
-				// set data template setelah selesai load page
-				$title = $module->getTitle();
-				$tpl->setTitle($title);
+				// // set data template setelah selesai load page
+				// $title = $module->getTitle();
+				// $tpl->setTitle($title);
 
 
-				$content = ob_get_contents();
+				// $content = ob_get_contents();
 			} catch (\Exception $ex) {
 				$errmsg = Log::error($ex->getMessage());
 				throw new \Exception($errmsg, $ex->getCode());
 			} finally {
-				ob_end_clean();
+				// ob_end_clean();
 			}
 
 

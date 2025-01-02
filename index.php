@@ -38,17 +38,15 @@ try {
 
 
 	// Prepare debug
-	PageRoute::ResetDebugOnPageRequest(["page/*", "module/page/*"]);
-
+	// PageRoute::ResetDebugOnPageRequest(["page/*", "module/page/*"]);
 
 	// Route internal agungdhewe/webservice
 	Router::setupDefaultRoutes();
 
-	// Route external: fgta5
+	// Route external: fgta5framework
 	Router::GET('module/asset/*', ModuleAssetRoute::class);
 	Router::GET('module/page/*', ModulePageRoute::class);
 	Router::POST('module/api/*', ModuleApiRoute::class);
-
 
 	
 	// Serve url
