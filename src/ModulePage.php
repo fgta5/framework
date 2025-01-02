@@ -2,31 +2,13 @@
 
 use AgungDhewe\PhpLogger\Log;
 use AgungDhewe\Webservice\ServiceRoute;
-use AgungDhewe\Webservice\WebTemplate;
+use AgungDhewe\Webservice\WebPage;
+use AgungDhewe\Webservice\IWebTemplate;
 
-abstract class ModulePage implements IDefaultModule {
-	private string $_title = "";
-	private array $_data = [];
+abstract class ModulePage extends WebPage implements IDefaultModule {
 	
 
-	protected function setData(array $data) : void {
-		$this->_data = $data;
-	}
-
-	public function getData() : array {
-		return $this->_data;
-	}
-
-	protected function setTitle(string $title) : void {
-		$this->_title = $title;
-	}
-
-	public function getTitle() : string {
-		return $this->_title;
-	}
-
-
-	public function GetTemplate(?array $param = []) : object {
+	public function GetTemplate(?array $param = []) : IWebTemplate {
 		$modulepageclass = array_key_exists('modulepageclass', $param) ? $param['modulepageclass'] : '';
 		if ($modulepageclass=='Fgta5\Framework\Pages\Container') {
 			return new TemplateContainer();

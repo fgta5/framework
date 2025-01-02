@@ -6,6 +6,8 @@ use AgungDhewe\Webservice\Routes\PageRoute;
 use AgungDhewe\Webservice\Database;
 use AgungDhewe\Webservice\ServiceRoute;
 use AgungDhewe\Webservice\Session;
+use AgungDhewe\Webservice\WebTemplate;
+use AgungDhewe\Webservice\IWebTemplate;
 
 use Fgta5\Framework\IDefaultModule;
 use Fgta5\Framework\IModulePage;
@@ -37,8 +39,6 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 			// Cek Class Exists
 			$requestedModulePageClass = ServiceRoute::getRequestedParameter('module/page/', $this->urlreq);
 			$modulePageClass = str_replace('/', '\\', $requestedModulePageClass);
-
-
 
 			// DefaultModulePageClass:  <vendor>\<name>\ModulePage
 			$ns = ServiceRoute::getModuleNamespace($modulePageClass);
@@ -90,36 +90,40 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 
 			$module = self::createModule($modulePageClass);
 			$tpl = $module->getTemplate(['modulepageclass'=>$modulePageClass]);
-			self::SetTemplate($tpl);
+		
 			
-			
-			// Load Module
-			$content = "ini default content";
-			$params = [];
+			// Validasi Template
+			if (!is_subclass_of($tpl, WebTemplate::class)) {
+				$tplclassname = get_class($tpl);
+				$errmsg = Log::error("Class '$tplclassname' not subclass of WebTemplate");
+				throw new \Exception($errmsg, 500);
+			}
+
+			if (!in_array(IWebTemplate::class, class_implements($tpl))) {
+				$tplclassname = get_class($tpl);
+				$errmsg = Log::error("Class '$tplclassname' not implements IWebTemplate");
+				throw new \Exception($errmsg, 500);
+			}
+
+
+			$content = "";
 			try {
-				// // cek apakah template valid
-				// if (!WebTemplate::Validate($tpl)) {
-				// 	$tplclassname = get_class($tpl);
-				// 	$errmsg = Log::error("Class '$tplclassname' not subclass of WebTemplate");
-				// 	throw new \Exception($errmsg, 500);
-				// }
+				self::SetTemplate($tpl);
+				ob_start();
+				
+				$module->LoadPage($requestedModulePageClass, $param);
+				$data = $module->getPageData();
+				self::SetPageData($data);
 
-				// ob_start();
-				// $module->LoadPage($requestedModulePageClass, $params);
-				// $data = $module->getData();
-				// self::SetData($data);
+				$title = $module->getTitle();
+				$tpl->setTitle($title);
 
-				// // set data template setelah selesai load page
-				// $title = $module->getTitle();
-				// $tpl->setTitle($title);
-
-
-				// $content = ob_get_contents();
+				$content = ob_get_contents();
 			} catch (\Exception $ex) {
 				$errmsg = Log::error($ex->getMessage());
 				throw new \Exception($errmsg, $ex->getCode());
 			} finally {
-				// ob_end_clean();
+				ob_end_clean();
 			}
 
 

@@ -5,7 +5,9 @@ interface IModulePage {
 
 	function LoadPage(string $requestedModulePageClass, array $params) : void;
 	function GetTemplate(?array $param = []) : object;
-	function getData() : array;
+	function getPageData() : array;
+	function getData(string $key) : mixed;
+
 	function getTitle() : string;
 
 }
