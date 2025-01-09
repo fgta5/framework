@@ -2,12 +2,11 @@
 
 interface IModulePage {
 	static function GetModulePagePath(string $modulePageClass) : string;
-
-	function LoadPage(string $requestedModulePageClass, array $params) : void;
-	function GetTemplate(?array $param = []) : object;
+	
+	function getTemplate(?array $param = []) : object;
+	function loadPage(string $requestedModulePageClass, array $params) : void;
 	function getPageData() : array;
 	function getData(string $key) : mixed;
-
 	function getTitle() : string;
 
 }

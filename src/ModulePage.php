@@ -5,29 +5,51 @@ use AgungDhewe\Webservice\ServiceRoute;
 use AgungDhewe\Webservice\WebPage;
 use AgungDhewe\Webservice\IWebTemplate;
 
-abstract class ModulePage extends WebPage implements IDefaultModule {
-	
+abstract class ModulePage extends WebPage implements IModulePage {
+	protected IWebTemplate $currentTemplate;
 
-	public function GetTemplate(?array $param = []) : IWebTemplate {
-		$modulepageclass = array_key_exists('modulepageclass', $param) ? $param['modulepageclass'] : '';
-		if ($modulepageclass=='Fgta5\Framework\Pages\Container') {
-			return new TemplateContainer();
-		} else {
-			return new TemplateModule();
+
+	abstract function loadPage(string $requestedModulePageClass, array $params) : void;
+
+
+
+	protected function render(string $viewpath, array $PARAMS) : void {
+		if (!is_array($PARAMS)) {
+			$PARAMS = [];
 		}
-	}
 
-	protected function render(string $viewpath) : void {
 		try {
 			if (!is_file($viewpath)) {
 				$errmsg = Log::error("File $viewpath is not found");
 				throw new \Exception($errmsg);
 			}
+
+			$this->setCurrentPageDir(dirname($viewpath));
+
+			$tpl = $this->getTemplate();
+			$page = $this;
+			$CONTENTPARAMS = $PARAMS; 
+
 			require_once $viewpath;
 		} catch (\Exception $ex) {
 			$errmsg = Log::error($ex->getMessage());
 			throw new \Exception($errmsg);
 		}
+	}
+
+
+	public function getTemplate(?array $param = []) : IWebTemplate {
+		if (isset($this->currentTemplate)) {
+			return $this->currentTemplate;
+		}
+		
+		$modulepageclass = array_key_exists('modulepageclass', $param) ? $param['modulepageclass'] : '';
+		if ($modulepageclass=='Fgta5\Framework\Pages\Container') {
+			$this->currentTemplate = new TemplateContainer();
+		} else {
+			$this->currentTemplate = new TemplateModule();
+		}
+		return $this->currentTemplate;
 	}
 
 	public static function GetModulePagePath(string $modulePageClass) : string {

@@ -2,10 +2,13 @@
 
 use AgungDhewe\PhpLogger\Log;
 
-use Fgta5\Framework\IModulePage;
 use Fgta5\Framework\ModulePage;
 
-class TestPage extends ModulePage implements IModulePage {
+class TestPage extends ModulePage {
+	public static function GetModulePageObject(object $obj) : TestPage {
+		return $obj;
+	}
+
 	public function LoadPage(string $requestedPage, array $params): void {
 		try {
 

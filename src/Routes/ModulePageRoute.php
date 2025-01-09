@@ -67,19 +67,17 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 				throw new \Exception($errmsg, 500);
 			}
 
-			// cek apakah defaultClass implement IDefaultModule
-			if (!in_array(IDefaultModule::class, class_implements($defclass))) {
-				$errmsg = Log::error("Class '$defclass' not implements IDefaultModule");
-				throw new \Exception($errmsg, 500);
-			}
+			// // cek apakah defaultClass implement IModulePage
+			// if (!in_array(IDefaultModule::class, class_implements($defclass))) {
+			// 	$errmsg = Log::error("Class '$defclass' not implements IDefaultModule");
+			// 	throw new \Exception($errmsg, 500);
+			// }
 
-
-
-			// cek apakah modulePageClass implement IModulePage 
-			if (!in_array(IModulePage::class, class_implements($modulePageClass))) {
-				$errmsg = Log::error("Class '$modulePageClass' not implements IModulePage");
-				throw new \Exception($errmsg, 500);
-			}
+			// // cek apakah modulePageClass implement IModulePage 
+			// if (!in_array(IModulePage::class, class_implements($modulePageClass))) {
+			// 	$errmsg = Log::error("Class '$modulePageClass' not implements IModulePage");
+			// 	throw new \Exception($errmsg, 500);
+			// }
 
 			// cek apakah modulePageClass subclass dari ModulePage
 			if (!is_subclass_of($modulePageClass, ModulePage::class)) {
@@ -111,7 +109,7 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 				self::SetTemplate($tpl);
 				ob_start();
 				
-				$module->LoadPage($requestedModulePageClass, $param);
+				$module->loadPage($requestedModulePageClass, $param);
 				$data = $module->getPageData();
 				self::SetPageData($data);
 

@@ -1,31 +1,37 @@
 <?php
-	use AgungDhewe\Webservice\WebTemplate;
-	$page = WebTemplate::getTemplateObject($this);
+	define('__TEMPLATE_NAME__', 'container');
+
+	use AgungDhewe\Webservice\Session;
+	use Fgta5\Framework\TemplateContainer;
+	
+	$tpl = TemplateContainer::getTemplate($this);
+	$user = Session::GetUser();
+
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title><?=$page->getTitle()?></title>
+		<title><?=$tpl->getTitle()?></title>
+		<base href="<?=$tpl->getBaseHref()?>">
 		<link rel="icon" href="/favicon.ico">
-		<link rel="stylesheet" href="<?=$page->GetTemplateAssetUrl('assets/style.css')?>">
-		<?=$page->getBlockContent('header-metadata')?>
-		<?=$page->getBlockContent('header-style')?>
+		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/style.css')?>">
+		<?=$tpl->getBlockContent('header-metadata')?>
+		<?=$tpl->getBlockContent('header-style')?>
 		<script>
 			var $ui = {};
 		</script>
-		<?=$page->getBlockContent('header-script')?>
+		<?=$tpl->getBlockContent('header-script')?>
 	</head>
 
 	<body>
 		<header>
 			<h1>Ini Container Template</h1>
-			<nav></nav>
 		</header>
 		<main>
-			<?=$page->getMainContent()?>
+			<?=$tpl->getMainContent()?>
 		</main>
 		<footer>
 			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
 		</footer>
 	</body>	
-	<?=$page->getBlockContent('footer-script')?>
+	<?=$tpl->getBlockContent('footer-script')?>
 </body>

@@ -23,5 +23,8 @@ class TemplateContainer extends WebTemplate implements IWebTemplate {
 		}
 	}
 
+	public static function getTemplate(IWebTemplate $ifc) : IWebTemplate {
+		return $ifc;
+	}
 
 }

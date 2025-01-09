@@ -1,3 +1,10 @@
+<?php
+use Fgta5\Framework\Pages\Container;
+$page = Container::GetModulePageObject($this);
+$tpl = $page->getTemplate();
+?>
+
+
 {block name="header-style"}
 <!-- BLOCK BEGIN: header-style --> 
 <style>
@@ -9,5 +16,18 @@
 {/block}
 
 
-
+<p>
 ini isi halaman container
+</p>
+
+<p>
+GetTemplateAssetUrl:<br>
+<?=$tpl->GetTemplateAssetUrl('assets/style.css')?>
+</p>
+
+
+<p>
+getPageAssetUrl:<br>
+<?=$page->getPageAssetUrl('Container.css')?><br>
+<?=$page->getPageAssetUrl('Container.mjs')?>
+</p>
