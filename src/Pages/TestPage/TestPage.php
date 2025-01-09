@@ -13,9 +13,9 @@ class TestPage extends ModulePage {
 		try {
 
 			$this->setTitle("Judul Module");
-
 			$pageviewpath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'TestPage.phtml']);
-			$this->render($pageviewpath);
+			Log::info("rendering file $pageviewpath");
+			$this->render($pageviewpath, $params);
 		} catch (\Exception $ex) {
 			Log::error($ex->getMessage());
 			throw $ex;

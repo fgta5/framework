@@ -13,7 +13,9 @@
 		<title><?=$tpl->getTitle()?></title>
 		<base href="<?=$tpl->getBaseHref()?>">
 		<link rel="icon" href="/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/style.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/containerlayout.css')?>">
 		<?=$tpl->getBlockContent('header-metadata')?>
 		<?=$tpl->getBlockContent('header-style')?>
 		<script>
@@ -23,15 +25,27 @@
 	</head>
 
 	<body>
-		<header>
-			<h1>Ini Container Template</h1>
-		</header>
-		<main>
-			<?=$tpl->getMainContent()?>
-		</main>
-		<footer>
-			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
-		</footer>
+
+		<?=$tpl->getMainContent()?>
+
+
+		<nav id="container-nav">
+			menu
+		</nav>
+
+		<div id="container-pagemask" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background-color: #fff;">
+			<div>
+			Please Wait ...
+			</div>
+		</div>
 	</body>	
 	<?=$tpl->getBlockContent('footer-script')?>
+
+	<script>
+		window.addEventListener("load", async (event) => {
+			var pagemask = document.getElementById('container-pagemask')
+			pagemask.classList.add('hidden');
+			// body.style.opacity = 1;
+		});
+	</script>	
 </body>

@@ -6,12 +6,12 @@
 /modules
 /vendor
 /logs
-
+/customs
 
 composer.lock
 
 log.txt
 debug.txt
-config-*.php
+config-production.php
 
 
