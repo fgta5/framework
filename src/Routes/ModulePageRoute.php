@@ -44,13 +44,17 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 			$ns = ServiceRoute::getModuleNamespace($modulePageClass);
 			$defclass = implode('\\', [$ns, 'ModulePage']);
 			// cek apakah Default Class exists
-			Log::info("loading class $defclass");	
-			if (!class_exists($defclass)) {
-				$errmsg = Log::error("Class '$defclass' is not exists");
+			Log::info("loading class $modulePageClass");	
+			if (!class_exists($modulePageClass)) {
+				$errmsg = Log::error("Class '$modulePageClass' is not exists");
 				throw new \Exception($errmsg, 500);
 			}
 
 			
+			// cari lokasi $modulePageClass dengan Reflection
+			$refl = new ReflectionClass($modulePageClass);
+
+
 			// loading class, tidak ikut PSR4
 			$path = $defclass::GetModulePagePath($modulePageClass);
 			if (!is_file($path)) {

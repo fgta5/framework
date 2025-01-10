@@ -25,15 +25,20 @@
 	</head>
 
 	<body>
+		<header>
+			head
+		</header>
 
-		<?=$tpl->getMainContent()?>
 
+		<main>
+			<?=$tpl->getMainContent()?>
+		</main>
 
 		<nav id="container-nav">
 			menu
 		</nav>
 
-		<div id="container-pagemask" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background-color: #fff;">
+		<div id="container-pagemask" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background-color: #fff;">
 			<div>
 			Please Wait ...
 			</div>

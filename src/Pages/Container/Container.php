@@ -11,11 +11,11 @@ class Container extends ModulePage {
 
 	public function loadPage(string $requestedPage, array $params): void {
 		try {
-
 			$this->setTitle("Container");
-			$pageviewpath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'Container.phtml']);
-			Log::info("rendering file $pageviewpath");
-			$this->render($pageviewpath, $params);
+			/* 
+			dari Container.php, kita tidak perlu merender apapun.
+			semua keperluan container dibuat pada templates/containertemplates.phtml
+			*/
 		} catch (\Exception $ex) {
 			Log::error($ex->getMessage());
 			throw $ex;

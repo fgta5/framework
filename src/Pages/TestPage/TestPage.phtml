@@ -5,6 +5,29 @@ $tpl = $page->getTemplate();
 ?>
 
 
+{block name="header-style"}
+<!-- BLOCK BEGIN: header-style --> 
+<style>
+	.hidden {
+		display: none;
+	}
+</style>
+<!-- BLOCK END: header-style --> 	
+{/block}
+
+
 <p>
-ini isi halaman test page
+ini isi halaman TestPage
+</p>
+
+<p>
+GetTemplateAssetUrl:<br>
+<?=$tpl->GetTemplateAssetUrl('assets/style.css')?>
+</p>
+
+
+<p>
+getPageAssetUrl:<br>
+<?=$page->getPageAssetUrl('TestPage.css')?><br>
+<?=$page->getPageAssetUrl('TestPage.mjs')?>
 </p>
