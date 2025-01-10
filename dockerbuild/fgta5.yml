@@ -1,7 +1,7 @@
 services:
   fgta5:
     container_name: fgta5
-    image: webserver_8_3
+    image: webserver_8_4
     hostname: fgta5
     ports:
       - 8006:80

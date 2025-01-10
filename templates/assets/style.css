@@ -1,0 +1,13 @@
+@import url("fonts/karla.css");
+
+* {
+	font-family: "Karla";  
+}
+
+body {
+	font-size: 14px;
+}
+
+.hidden {
+	display: none !important;
+}

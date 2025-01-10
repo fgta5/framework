@@ -4,8 +4,8 @@ use AgungDhewe\Webservice\WebTemplate;
 use AgungDhewe\Webservice\Configuration;
 use AgungDhewe\Webservice\IWebTemplate;
 
-class TemplateContainer extends WebTemplate implements IWebTemplate {
-	const string NAME = "containertemplate";
+class TemplatePrint extends WebTemplate implements IWebTemplate  {
+	const string NAME = "printtemplate";
 
 	public function GetName() : string {
 		return self::NAME;
@@ -22,9 +22,4 @@ class TemplateContainer extends WebTemplate implements IWebTemplate {
 			return $templatedir;
 		}
 	}
-
-	public static function getTemplate(IWebTemplate $ifc) : IWebTemplate {
-		return $ifc;
-	}
-
 }

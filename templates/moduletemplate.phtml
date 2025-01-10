@@ -1,0 +1,31 @@
+<?php
+	use AgungDhewe\Webservice\WebTemplate;
+	$page = WebTemplate::getTemplateObject($this);
+?><!DOCTYPE html>
+<html>
+	<head>
+		<title><?=$page->getTitle()?></title>
+		<link rel="icon" href="/favicon.ico">
+		<link rel="stylesheet" href="<?=$page->GetTemplateAssetUrl('assets/style.css')?>">
+		<?=$page->getBlockContent('header-metadata')?>
+		<?=$page->getBlockContent('header-style')?>
+		<script>
+			var $ui = {};
+		</script>
+		<?=$page->getBlockContent('header-script')?>
+	</head>
+
+	<body>
+		<header>
+			<h1>Ini Module Template</h1>
+			<nav></nav>
+		</header>
+		<main>
+			<?=$page->getMainContent()?>
+		</main>
+		<footer>
+			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
+		</footer>
+	</body>
+	<?=$page->getBlockContent('footer-script')?>
+</body>

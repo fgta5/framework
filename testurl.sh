@@ -6,6 +6,10 @@
 # URL="https://webservice.localhost/template/assets/sampleimage.svg"
 # URL="http://localhost:8005/testhalaman"
 # URL="https://webservice.localhost"
+# curl -D - -H "webservice-debug-channel: fgta5-dev" $URL
+
+
+
 URL="https://fgta5.localhost"
 
 echo GET $URL

@@ -1,28 +1,56 @@
-<!DOCTYPE html>
+<?php
+	define('__TEMPLATE_NAME__', 'container');
+
+	use AgungDhewe\Webservice\Session;
+	use Fgta5\Framework\TemplateContainer;
+	
+	$tpl = TemplateContainer::getTemplate($this);
+	$user = Session::GetUser();
+
+?><!DOCTYPE html>
 <html>
 	<head>
-		<title><?=$this->getTitle()?></title>
-		<link rel="icon" href="favicon.ico">
-		<link rel="stylesheet" href="<?=$this->getAssetUrl('assets/style.css')?>">
-		<?=$this->getBlockContent('header-metadata')?>
-		<?=$this->getBlockContent('header-style')?>
+		<title><?=$tpl->getTitle()?></title>
+		<base href="<?=$tpl->getBaseHref()?>">
+		<link rel="icon" href="/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/style.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/containerlayout.css')?>">
+		<?=$tpl->getBlockContent('header-metadata')?>
+		<?=$tpl->getBlockContent('header-style')?>
 		<script>
 			var $ui = {};
 		</script>
-		<?=$this->getBlockContent('header-script')?>
+		<?=$tpl->getBlockContent('header-script')?>
 	</head>
 
 	<body>
 		<header>
-			<h1>Container Template</h1>
-			<nav></nav>
+			head
 		</header>
+
+
 		<main>
-			<?=$this->getMainContent()?>
+			<?=$tpl->getMainContent()?>
 		</main>
-		<footer>
-			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
-		</footer>
+
+		<nav id="container-nav">
+			menu
+		</nav>
+
+		<div id="container-pagemask" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background-color: #fff;">
+			<div>
+			Please Wait ...
+			</div>
+		</div>
 	</body>	
-	<?=$this->getBlockContent('footer-script')?>
+	<?=$tpl->getBlockContent('footer-script')?>
+
+	<script>
+		window.addEventListener("load", async (event) => {
+			var pagemask = document.getElementById('container-pagemask')
+			pagemask.classList.add('hidden');
+			// body.style.opacity = 1;
+		});
+	</script>	
 </body>
