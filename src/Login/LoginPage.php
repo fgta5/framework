@@ -18,7 +18,7 @@ class LoginPage extends ModulePage  {
 	public function loadPage(string $requestedPage, array $params): void {
 		try {
 
-			echo "test";
+			echo "login page";
 		} catch (\Exception $ex) {
 			Log::Error($ex->getMessage());
 			throw $ex;

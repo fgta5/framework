@@ -10,4 +10,6 @@ interface IModulePage {
 	function getData(string $key) : mixed;
 	function getTitle() : string;
 
+	function isContainer() : bool;
+
 }

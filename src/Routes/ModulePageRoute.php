@@ -38,20 +38,24 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 
 			// modul applikasi yang di request user
 			$requestedModulePageClass = ServiceRoute::getRequestedParameter('module/page/', $this->urlreq);
+			$isContainer = $requestedModulePageClass=="Fgta5/Framework/Container/ContainerPage";
 
 			// Cek apakah sudah login
-			/*
 			if (! Session::IsLoggedIn()) {
-				Log::Info('User not logged in, redirect to login page');
-				$loginPageClass = Configuration::Get('LoginPage');
-				if (empty($loginPageClass)) {
-					$requestedModulePageClass = 'Fgta5/Framework/Login/LoginPage';
+				if ($isContainer) {
+					Log::Info('User not logged in, redirect to login page');
+					$loginPageClass = Configuration::Get('LoginPage');
+					if (empty($loginPageClass)) {
+						$requestedModulePageClass = 'Fgta5/Framework/Login/LoginPage';
+					} else {
+						$requestedModulePageClass = $loginPageClass;
+					}
 				} else {
-					$requestedModulePageClass = $loginPageClass;
+					Log::Info('User not logged in, munculkan script agar container reload');
+					echo "belum login / session expired, reload container";
+					die();
 				}
-
 			}
-			*/
 
 			
 			$modulePageClass = str_replace('/', '\\', $requestedModulePageClass);
@@ -69,6 +73,9 @@ class ModulePageRoute extends PageRoute implements IRouteHandler {
 
 			$module = self::createModule($modulePageClass, $param);
 			$tpl = $module->getTemplate(['modulepageclass'=>$modulePageClass]);
+
+
+			
 
 			// Validasi Template
 			if (!is_subclass_of($tpl, WebTemplate::class)) {

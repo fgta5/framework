@@ -23,6 +23,10 @@ abstract class ModulePage extends WebPage implements IModulePage {
 		$this->currentTemplate = $tpl;
 	}
 
+	public function isContainer() : bool {
+		return false;
+	}
+
 	public static function GetModulePagePath(string $modulePageClass) : string {
 		$ns = ServiceRoute::getModuleNamespace($modulePageClass);
 		$classdir = str_replace($ns . '\\', '', $modulePageClass);
