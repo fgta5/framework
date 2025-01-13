@@ -1,10 +1,10 @@
-<?php
-	define('__TEMPLATE_NAME__', 'container');
+<?php declare(strict_types=1);
+	define('__TEMPLATE_NAME__', 'containertemplate');
 
 	use AgungDhewe\Webservice\Session;
 	use Fgta5\Framework\TemplateContainer;
 	
-	$tpl = TemplateContainer::getTemplate($this);
+	$tpl = TemplateContainer::getObject($this);
 	$user = Session::GetUser();
 
 ?><!DOCTYPE html>
@@ -14,10 +14,18 @@
 		<base href="<?=$tpl->getBaseHref()?>">
 		<link rel="icon" href="/favicon.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/style.css')?>">
+		<link rel="stylesheet" href="asset/assets/style.css">
 		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/containerlayout.css')?>">
 		<?=$tpl->getBlockContent('header-metadata')?>
+	
+		<style>
+			.hidden {
+				display: none !important;
+			}
+		</style>	
+
 		<?=$tpl->getBlockContent('header-style')?>
+		
 		<script>
 			var $ui = {};
 		</script>

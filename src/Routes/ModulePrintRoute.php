@@ -1,4 +1,5 @@
-<?php namespace Fgta5\Framework\Routes;
+<?php declare(strict_types=1);
+namespace Fgta5\Framework\Routes;
 
 use AgungDhewe\PhpLogger\Log;
 use AgungDhewe\Webservice\IRouteHandler;

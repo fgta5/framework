@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
-	define('__TEMPLATE_NAME__', 'moduletemplate');
+	define('__TEMPLATE_NAME__', 'pagetemplate');
 
 	use AgungDhewe\Webservice\Session;
-	use Fgta5\Framework\TemplateModule;
+	use Fgta5\Framework\TemplatePlain;
 	
-	$tpl = TemplateModule::getObject($this);
+	$tpl = TemplatePlain::getObject($this);
 	$user = Session::GetUser();
 
 ?><!DOCTYPE html>
@@ -16,24 +16,11 @@
 		<link rel="stylesheet" href="asset/assets/style.css">
 		<?=$tpl->getBlockContent('header-metadata')?>
 		<?=$tpl->getBlockContent('header-style')?>
-		<script>
-			var $ui = {};
-		</script>
 		<?=$tpl->getBlockContent('header-script')?>
 	</head>
 
 	<body>
-		<header>
-			<h1>Ini Module Template</h1>
-			<nav></nav>
-		</header>
-		<main>
-			<?=$tpl->getMainContent()?>
-		</main>
-		<footer>
-			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
-		</footer>
+		<?=$tpl->getMainContent()?>
 	</body>
 	<?=$tpl->getBlockContent('footer-script')?>
-	
 </body>

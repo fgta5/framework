@@ -1,4 +1,5 @@
-<?php namespace Fgta5\Framework;
+<?php declare(strict_types=1);
+namespace Fgta5\Framework;
 
 interface IModulePage {
 	static function GetModulePagePath(string $modulePageClass) : string;

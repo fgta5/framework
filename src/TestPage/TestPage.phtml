@@ -1,6 +1,6 @@
 <?php
-use Fgta5\Framework\Pages\TestPage;
-$page = TestPage::GetModulePageObject($this);
+use Fgta5\Framework\TestPage\TestPage;
+$page = TestPage::GetObject($this);
 $tpl = $page->getTemplate();
 ?>
 

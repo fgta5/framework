@@ -1,11 +1,11 @@
-<?php namespace Fgta5\Framework\Pages;
+<?php namespace Fgta5\Framework\TestPage;
 
 use AgungDhewe\PhpLogger\Log;
 
 use Fgta5\Framework\ModulePage;
 
 class TestPage extends ModulePage {
-	public static function GetModulePageObject(object $obj) : TestPage {
+	public static function GetObject(object $obj) : TestPage {
 		return $obj;
 	}
 
@@ -14,10 +14,10 @@ class TestPage extends ModulePage {
 
 			$this->setTitle("Judul Module");
 			$pageviewpath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'TestPage.phtml']);
-			Log::info("rendering file $pageviewpath");
-			$this->render($pageviewpath, $params);
+			Log::Info("rendering file $pageviewpath");
+			$this->renderPageFile($pageviewpath, $params);
 		} catch (\Exception $ex) {
-			Log::error($ex->getMessage());
+			Log::Error($ex->getMessage());
 			throw $ex;
 		}
 	}

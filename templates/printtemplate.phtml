@@ -1,1 +1,18 @@
-ini template untuk print
+<?php declare(strict_types=1);
+	define('__TEMPLATE_NAME__', 'pagetemplate');
+
+	use AgungDhewe\Webservice\Session;
+	use Fgta5\Framework\TemplatePrint;
+	
+	$tpl = TemplatePrint::getObject($this);
+	$user = Session::GetUser();
+
+?><!DOCTYPE html>
+<html>
+	<head>
+
+	</head>
+	<body>
+		<?=$tpl->getMainContent()?>
+	</body>
+</html>

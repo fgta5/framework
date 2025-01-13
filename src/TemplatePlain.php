@@ -5,10 +5,10 @@ use AgungDhewe\Webservice\WebTemplate;
 use AgungDhewe\Webservice\Configuration;
 use AgungDhewe\Webservice\IWebTemplate;
 
-class TemplatePrint extends WebTemplate implements IWebTemplate  {
-	const string NAME = "printtemplate";
+class TemplatePlain extends WebTemplate implements IWebTemplate  {
+	const string NAME = "plaintemplate";
 
-	public static function getObject(object $tpl) : TemplatePrint {
+	public static function getObject(object $tpl) : TemplatePlain {
 		return $tpl;
 	}
 
