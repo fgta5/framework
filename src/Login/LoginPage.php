@@ -18,7 +18,11 @@ class LoginPage extends ModulePage  {
 	public function loadPage(string $requestedPage, array $params): void {
 		try {
 
-			echo "login page";
+			$this->setData('Nama', 'Agung');
+
+
+			$pageviewpath = implode(DIRECTORY_SEPARATOR, [__DIR__, 'LoginPage.phtml']);
+			$this->renderPageFile($pageviewpath, $params);
 		} catch (\Exception $ex) {
 			Log::Error($ex->getMessage());
 			throw $ex;

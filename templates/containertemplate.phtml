@@ -5,7 +5,9 @@
 	use Fgta5\Framework\TemplateContainer;
 	
 	$tpl = TemplateContainer::getObject($this);
-	$user = Session::GetUser();
+	$user = Session::GetWebUser();
+
+	
 
 ?><!DOCTYPE html>
 <html>
@@ -14,21 +16,20 @@
 		<base href="<?=$tpl->getBaseHref()?>">
 		<link rel="icon" href="/favicon.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="asset/assets/style.css">
-		<link rel="stylesheet" href="<?=$tpl->GetTemplateAssetUrl('assets/containerlayout.css')?>">
+		
 		<?=$tpl->getBlockContent('header-metadata')?>
 	
 		<style>
-			.hidden {
-				display: none !important;
-			}
+		<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-style.css']); ?>
 		</style>	
-
 		<?=$tpl->getBlockContent('header-style')?>
-		
+
 		<script>
-			var $ui = {};
+		<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-header-script.js']); ?>
 		</script>
+
+		<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'fgta5component.inc.phtml']); ?>
+
 		<?=$tpl->getBlockContent('header-script')?>
 	</head>
 
@@ -46,19 +47,17 @@
 			menu
 		</nav>
 
-		<div id="container-pagemask" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background-color: #fff;">
-			<div>
-			Please Wait ...
-			</div>
-		</div>
+		<?php
+			require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-loading-mask.html']);
+		?>
 	</body>	
-	<?=$tpl->getBlockContent('footer-script')?>
+
 
 	<script>
-		window.addEventListener("load", async (event) => {
-			var pagemask = document.getElementById('container-pagemask')
-			pagemask.classList.add('hidden');
-			// body.style.opacity = 1;
-		});
-	</script>	
-</body>
+		<?php
+			require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-footer-script.js']);
+		?>
+	</script>
+	<?=$tpl->getBlockContent('footer-script')?>
+
+</html>

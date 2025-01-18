@@ -5,7 +5,7 @@
 	use Fgta5\Framework\TemplatePlain;
 	
 	$tpl = TemplatePlain::getObject($this);
-	$user = Session::GetUser();
+	$user = Session::GetWebUser();
 
 ?><!DOCTYPE html>
 <html>
@@ -13,14 +13,39 @@
 		<title><?=$tpl->getTitle()?></title>
 		<base href="<?=$tpl->getBaseHref()?>">
 		<link rel="icon" href="/favicon.ico">
-		<link rel="stylesheet" href="asset/assets/style.css">
+
 		<?=$tpl->getBlockContent('header-metadata')?>
+		
+		<style>
+		<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-style.css']); ?>
+		</style>	
 		<?=$tpl->getBlockContent('header-style')?>
+
+
+		<script>
+		<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-header-script.js']); ?>
+		</script>
+
+		<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'fgta5component.inc.phtml']); ?>
+
 		<?=$tpl->getBlockContent('header-script')?>
 	</head>
 
 	<body>
 		<?=$tpl->getMainContent()?>
+
+
+		<?php
+			require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-loading-mask.html']);
+		?>
+
 	</body>
+
+	<script>
+		<?php
+			require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'basic-footer-script.js']);
+		?>
+	</script>	
 	<?=$tpl->getBlockContent('footer-script')?>
-</body>
+
+</html>

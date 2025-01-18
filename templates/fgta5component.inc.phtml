@@ -1,0 +1,9 @@
+<?php
+use AgungDhewe\Webservice\Configuration;
+?>
+
+<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/fgta5js/fgta5-component.css')?>">
+<script type="module">
+	import { $fgta5 } from '<?=$tpl->getTemplateAssetUrl(Configuration::Get('Fgta5Component'))?>'
+	window.$fgta5 = $fgta5
+</script>

@@ -1,12 +1,16 @@
 .DS_Store
 .vscode
 
+
+**/node_modules
+
 /dockerbuild-*
 /plugins
 /modules
 /vendor
 /logs
 /customs
+
 
 composer.lock
 

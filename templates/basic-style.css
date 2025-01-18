@@ -1,0 +1,23 @@
+@import url("asset/assets/fonts/karla.css");
+
+
+* {
+	font-family: "Karla";  
+}
+
+body {
+	font-size: 14px;
+}
+
+button {
+	cursor: pointer;
+}
+
+#fgta5-loading-pagemask {
+	position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background-color: #fff;
+	transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.hidden {
+	display: none !important;
+}

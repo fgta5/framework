@@ -5,7 +5,7 @@
 	use Fgta5\Framework\TemplatePage;
 	
 	$tpl = TemplatePage::getObject($this);
-	$user = Session::GetUser();
+	$user = Session::GetWebUser();
 
 ?><!DOCTYPE html>
 <html>
@@ -31,4 +31,5 @@
 		</footer>
 	</body>
 	<?=$tpl->getBlockContent('footer-script')?>
-</body>
+
+</html>

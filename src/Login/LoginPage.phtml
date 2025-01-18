@@ -1,0 +1,27 @@
+<?php
+use Fgta5\Framework\Login\LoginPage;
+$page = LoginPage::GetObject($this);
+$tpl = $page->getTemplate();
+?>
+
+{block name="footer-script"}
+<script type="module">
+	import * as page from './module/asset/Fgta5/Framework/Login/LoginPage.mjs'
+	window.$page = page
+	window.addEventListener("load", async (event) => {
+		await window.$page.main()
+		window.$fn.SetPageLoaded();
+	});
+</script>	
+{/block}
+
+
+<h1>Login</h1>
+<div>
+	<form id="form" onsubmit="return false">
+		<input id="obj_txt_user_id" type="text" placeholder="UserId">
+		<input id="obj_txt_user_password" type="password" placeholder="Password">
+		<button id="btn_login">Login</button>
+	</form>
+</div>
+
